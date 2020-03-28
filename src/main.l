@@ -1,12 +1,13 @@
 
 %{
 	/*
-		Seção de definição de variáveis
-		Trabalho de identificação dos emails.
-		
-		CHAR		[(.)(_)(-)]
+	Densevolvedor: Anderson Santos Silva
+	RA: 166191
+	Objetivo: Programa que recebe uma mensagem e identifica emails válidos no interior da mensagem.	
 	*/
-		#include <stdio.h>		
+		#include <stdio.h>
+		#include <string.h>	
+		int i, j = 0;	
 %}
 
 ALFANUM	[a-zA-Z0-9]
@@ -19,10 +20,19 @@ CHAR		{TRACO}|{PONTO}|{UNDER}
 NOME		{ALFANUM}+({CHAR}*{ALFANUM}+)*
 
 EMAIL		{NOME}{ARROBA}{NOME}
+VALIDO	{EMAIL}(\.\ )?
 
 %%
+{EMAIL}						{printf("%s\n", yytext);}
+{VALIDO}					{	i = strlen(yytext);
+										while(i-2>j){
+											printf("%c", yytext[j]);
+											j++;
+										}
+										j = 0;
+										printf("\n");
+									}
 
-{EMAIL}	{printf("%s \n", yytext);}
 
 
 [[:space:]]+ ;
